@@ -1,6 +1,7 @@
 import pytest
 
-from src.classes import Category, Product
+from src.caetgory import Category
+from src.product import Product
 
 
 @pytest.fixture
@@ -11,6 +12,23 @@ def product1():
 @pytest.fixture
 def product2():
     return Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+
+
+@pytest.fixture
+def product3():
+    return Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
+
+
+@pytest.fixture
+def product4_new_product():
+    return Product.new_product(
+        {
+            "name": "Samsung Galaxy S23 Ultra",
+            "description": "256GB, Серый цвет, 200MP камера",
+            "price": 180000.0,
+            "quantity": 5,
+        }
+    )
 
 
 @pytest.fixture
