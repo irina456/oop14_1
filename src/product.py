@@ -18,6 +18,19 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __call__(self, *args, **kwds):
+        return f"{self.name}, харрактеристики: {self.description}, {self.price} руб. Остаток: {self.quantity} шт.\n"
+
+    def __str__(self):
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт.\n"
+
+    def __add__(self, products):
+        sum_income_items = self.__price * self.quantity
+
+        result = products.price * products.quantity
+        result += sum_income_items
+        return result
+
     @classmethod
     def new_product(cls, update: dict):
         result = []
