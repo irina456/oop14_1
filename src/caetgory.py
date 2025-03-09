@@ -1,22 +1,4 @@
-# Class Product
-class Product:
-    """Accepts 4 required properties and returns data using 4 methods:
-    name - returns the name
-    description - returns the product description
-    price - returns the product price
-    quantity - returns the product quantity
-    """
-
-    name: str
-    description: str
-    price: int
-    quantity: int
-
-    def __init__(self, name, description, price, quantity):
-        self.name = name
-        self.description = description
-        self.price = price
-        self.quantity = quantity
+from src.product import Product
 
 
 class Category:
@@ -39,6 +21,19 @@ class Category:
     def __init__(self, name, description, products):
         self.name = name
         self.description = description
-        self.products = products
+        self.__products = products
         Category.category_count += 1
         Category.product_count += len(products)
+
+    def add_product(self, new_item):
+        if isinstance(new_item, Product):
+            self.__products = [new_item]
+        else:
+            print(f"Объект {new_item} не является экземпляром класса Product\n")
+
+    @property
+    def products(self):
+        result = ""
+        for i, key in enumerate(self.__products):
+            result += f"{key.name}, {key.price} руб. Остаток: {key.quantity} шт.\n"
+        return result

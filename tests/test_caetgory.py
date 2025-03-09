@@ -1,17 +1,3 @@
-def test_class_product_1(product1):
-    assert product1.name == "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера"
-    assert product1.description == "256GB, Серый цвет, 200MP камера"
-    assert product1.price == 180000.0
-    assert product1.quantity == 5
-
-
-def test_class_product_2(product2):
-    assert product2.name == "Xiaomi Redmi Note 11"
-    assert product2.description == "1024GB, Синий"
-    assert product2.price == 31000.0
-    assert product2.quantity == 14
-
-
 def test_class_category_1(category1):
     assert category1.name == "Смартфоны"
     assert (
@@ -38,3 +24,14 @@ def test_count_category1(category1):
 def test_count_category2(category2):
     assert category2.category_count == 4
     assert category2.product_count == 8
+
+
+def test_add_product(category1, product3):
+    category1.add_product(product3)
+    assert category1.products == """55" QLED 4K, 123000.0 руб. Остаток: 7 шт.\n"""
+
+
+def test_add_product_no_valid(category1, capsys):
+    category1.add_product(1)
+    captured = capsys.readouterr()
+    assert captured.out == "Объект 1 не является экземпляром класса Product\n\n"
