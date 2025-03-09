@@ -35,3 +35,14 @@ def test_add_product_no_valid(category1, capsys):
     category1.add_product(1)
     captured = capsys.readouterr()
     assert captured.out == "Объект 1 не является экземпляром класса Product\n\n"
+
+
+def test_call(category1, capsys):
+    print(category1())
+    captured = capsys.readouterr()
+    assert (
+        captured.out
+        == """Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт.
+Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14 шт.
+55" QLED 4K, 123000.0 руб. Остаток: 7 шт.\n\n"""
+    )
