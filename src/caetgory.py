@@ -41,7 +41,7 @@ class Category:
         if isinstance(new_item, Product):
             self.__products = [new_item]
         else:
-            print(f"Объект {new_item} не является экземпляром класса Product\n")
+            raise TypeError(f"Объект {new_item} не является экземпляром класса Product\n")
 
     @property
     def products(self):
