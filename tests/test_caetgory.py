@@ -1,3 +1,6 @@
+import pytest
+
+
 def test_class_category_1(category1):
     assert category1.name == "Смартфоны"
     assert (
@@ -31,7 +34,23 @@ def test_add_product(category1, product3):
     assert category1.products == """55" QLED 4K, 123000.0 руб. Остаток: 7 шт.\n"""
 
 
-def test_add_product_no_valid(category1, capsys):
-    category1.add_product(1)
+def test_add_product_no_valid(category1):
+    with pytest.raises(TypeError):
+        assert category1.add_product(1) == "Объект 1 не является экземпляром класса Product"
+
+
+def test_call(category1, capsys):
+    print(category1())
     captured = capsys.readouterr()
-    assert captured.out == "Объект 1 не является экземпляром класса Product\n\n"
+    assert (
+        captured.out
+        == """Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт.
+Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14 шт.
+55" QLED 4K, 123000.0 руб. Остаток: 7 шт.\n\n"""
+    )
+
+
+def test_add_grass(category1, capsys):
+    print(category1)
+    captured = capsys.readouterr()
+    assert captured.out == "Смартфоны, количество продуктов: 26 шт.\n\n"

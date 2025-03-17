@@ -26,3 +26,25 @@ def test_price_no_valid(product2, capsys):
 def test_price_valid(product2):
     product2.price = 180000.0
     assert product2.price == 180000.0
+
+
+def test_str_magics(product2, capsys):
+    print(product2)
+    captured = capsys.readouterr()
+    assert captured.out == """Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14 шт.\n\n"""
+
+
+def test_add(product1, product2):
+    assert product1 + product2 == 1334000
+
+
+def test_add_no_valid(product1, category1, capsys):
+    product1 + category1
+    captured = capsys.readouterr()
+    assert captured.out == "Переданный объект не является экземпляром класса Product\n\n"
+
+
+def test_call(product2, capsys):
+    print(product2())
+    captured = capsys.readouterr()
+    assert captured.out == """Xiaomi Redmi Note 11, харрактеристики: 1024GB, Синий, 31000.0 руб. Остаток: 14 шт.\n\n"""
