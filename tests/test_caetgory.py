@@ -55,3 +55,10 @@ def test_add_grass(category1, capsys):
     captured = capsys.readouterr()
     assert captured.out == "Смартфоны, количество продуктов: 26 шт.\n\n"
 
+
+def test_add_product_middle_price_zero(middle_price_fixture):
+    assert middle_price_fixture.middle_price() == 0
+
+
+def test_add_product_middle_price_ok(category1):
+    assert category1.middle_price() == 12846.153846153846
