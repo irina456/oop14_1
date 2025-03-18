@@ -54,3 +54,4 @@ def test_add_grass(category1, capsys):
     print(category1)
     captured = capsys.readouterr()
     assert captured.out == "Смартфоны, количество продуктов: 26 шт.\n\n"
+
