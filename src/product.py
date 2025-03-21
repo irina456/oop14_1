@@ -19,7 +19,10 @@ class Product(BaseProduct):
         self.name = name
         self.description = description
         self.__price = price
-        self.quantity = quantity
+        if quantity and quantity != 0:
+            self.quantity = quantity
+        else:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
 
     def __call__(self, *args, **kwds):
         return f"{self.name}, харрактеристики: {self.description}, {self.price} руб. Остаток: {self.quantity} шт.\n"
@@ -71,15 +74,18 @@ class MixinLog(Product):
 
     def __init__(self, name, description, price, quantity):
         super().__init__(name, description, price, quantity)
-        print(f'''  Был создан экземпляр класса {str(self.__class__)[20:-2]}
+        print(
+            f"""  Был создан экземпляр класса {str(self.__class__)[20:-2]}
         Входные данные:
             Наименование: {self.name}
             Описание: {self.description}
             Цена: {self.price}
-            Колличество: {self.quantity}''')
+            Колличество: {self.quantity}"""
+        )
 
 
 class Smartphone(MixinLog, Product):
+
     efficiency: float
     model: str
     memory: int
@@ -100,6 +106,7 @@ class Smartphone(MixinLog, Product):
 
 
 class LawnGrass(MixinLog, Product):
+
     country: str
     germination_period: str
     color: str
